@@ -59,3 +59,64 @@ sns.despine()
 - Excel stays relatively stable as the second most requested skill, despite a few dips, and remains one of the core tools for data analyst roles.
 - Python shows moderate fluctuations, with stronger demand in the middle of the year, confirming its continued importance for analytical and technical tasks.
 - Power BI and Tableau are less demanded overall, but both show stronger growth in the second half of the year, suggesting increasing interest in BI and data visualization skills.
+
+## 3. How well do jobs and skills pay for Data Analysts?
+
+To identify the highest-paying roles and skills, I only got jobs in the United States and looked at their median salary. But first I looked at the salary distributions of common data jobs like Data Scientist, Data Engineer, and Data Analyst, to get an idea of which jobs are paid the most.
+
+
+View my notebook with detailed steps here: 
+[4_Salary_Analysis.ipynb](3_Project/4_Salary_Analysis.ipynb)
+
+### Visualize Data
+
+```python
+sns.boxplot(data=df_UK_Top6, x='salary_year_avg', y='job_title_short', order=job_order)
+sns.set_theme (style='ticks', palette='pastel')
+
+plt.title('Salary Distributions in the United Kingdom')
+plt.xlabel('Yearly Salary (USD)')
+plt.ylabel(' ')
+ax = plt.gca()
+ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K'))
+plt.xlim(0, 600000)
+plt.show()
+```
+### Results
+
+![Salary Distributions of Data Jobs in the UK](3_Project/images/Salary_Graph.png)
+
+### Insights
+
+- Senior Data Scientist shows the highest salary distribution overall, with the highest median and a relatively wide range, indicating that this role is the most highly rewarded in the UK market.
+- Data Scientist and Data Engineer roles display broader salary spreads, suggesting greater variability in compensation depending on experience, company, or specialization.
+- Data Analyst has the lowest salary distribution among the listed roles, although there are still a few higher outliers, showing that some positions can pay significantly above the typical range.
+- Senior Data Analyst and Senior Data Engineer appear more concentrated around specific salary levels, with several outliers, which may indicate fewer observations or more standardized pay ranges at the senior level.
+- Overall, senior positions tend to offer higher salaries than non-senior roles, confirming a clear upward shift in pay with experience and seniority.
+
+## Highest Paid & Most Demanded Skills for Data Analysts 
+
+### Visualize Data
+
+```python
+fig, ax = plt.subplots(2, 1)  
+
+# Top 10 Highest Paid Skills for Data Analysts
+sns.barplot(data=df_DA_top_pay, x='median', y=df_DA_top_pay.index, hue='median', ax=ax[0], palette='dark:b_r')
+
+# Top 10 Most In-Demand Skills for Data Analystsr')
+sns.barplot(data=df_DA_skills, x='median', y=df_DA_skills.index, hue='median', ax=ax[1], palette='light:b')
+
+plt.show()
+```
+### Results
+
+![Highest paid skills and in-Demand Skills in UK](3_Project/images/hightest.png)
+
+### Insights
+
+- The top graph shows that specialized technical skills like pandas, TensorFlow, NumPy, C++, and PyTorch are associated with the highest salaries, in some cases reaching around $177K. However, many of these skills appear in only a very small number of job postings, so the results may reflect isolated high-paying roles rather than broad market demand.
+
+- The bottom graph highlights that foundational skills like Tableau, SQL, Python, Power BI, and Excel are the most in-demand for data analyst positions, even though they do not offer the very highest salaries. This demonstrates the importance of these core skills for employability and practical relevance in data analysis roles.
+
+- There is a clear distinction between the skills that are highest paid and those that are most in-demand. Data analysts aiming to maximize their career potential should consider building a balanced skill set that includes both widely demanded foundational tools and specialized technical skills that may increase earning potential.
