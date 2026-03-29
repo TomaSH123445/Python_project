@@ -120,3 +120,62 @@ plt.show()
 - The bottom graph highlights that foundational skills like Tableau, SQL, Python, Power BI, and Excel are the most in-demand for data analyst positions, even though they do not offer the very highest salaries. This demonstrates the importance of these core skills for employability and practical relevance in data analysis roles.
 
 - There is a clear distinction between the skills that are highest paid and those that are most in-demand. Data analysts aiming to maximize their career potential should consider building a balanced skill set that includes both widely demanded foundational tools and specialized technical skills that may increase earning potential.
+
+## 4. What are the most optimal skills to learn for Data Analysts?
+
+To identify the most optimal skills to learn ( the ones that are the highest paid and highest in demand) I calculated the percent of skill demand and the median salary of these skills. To easily identify which are the most optimal skills to learn.
+
+View my notebook with detailed steps here: 
+[5_Optimal_Skill.ipynb](3_Project/5_Optimal_Skill.ipynb)
+
+### Visualize Data
+
+```python
+from adjustText import adjust_text
+import matplotlib.pyplot as plt
+
+plt.scatter(df_DA_skills_high_demand['skill_percent'], df_DA_skills_high_demand['median_salary'])
+plt.show()
+```
+### Results
+
+![Most Optimal Skills for Data Analysts in the UK](3_Project/images/Optimal_skills.png)
+
+### Insights
+
+- Python and Excel sit at the top of the salary range (around $87–88K median) while also showing moderate prevalence (~25–33% of postings). This suggests that in the UK market, these skills are not only common enough to matter, but they’re also strongly associated with higher-paying Data Analyst roles.
+- SQL is by far the most common skill (roughly ~60%+ of postings), but its median salary is a bit lower (~$82K) than Python/Excel. That’s typical for “baseline” skills: employers expect them widely, so they’re essential for employability, but they don’t differentiate pay as much as higher-leverage tools.
+- Tableau sits in a good “sweet spot”: reasonably common (~25%) and still on the higher salary side (~$82K), making it a solid differentiator. In contrast, SAS appears both less common (~10–15%) and much lower-paid (~$50–55K) in this sample, suggesting it’s either tied to a different segment (legacy / niche roles) or simply not rewarded as strongly in the UK Data Analyst postings you analyzed.
+
+## Visualizing Different Techonologies
+
+Let's visualize the different technologies as well in the graph. We'll add color labels based on the technology (e.g., {Programming: Python})
+
+View my notebook with detailed steps here: 
+[5_Optimal_Skill.ipynb](3_Project/5_Optimal_Skill.ipynb)
+
+### Visualize Data
+
+```python
+from matplotlib.ticker import PercentFormatter
+
+# Create a scatter plot
+scatter = sns.scatterplot(
+    data=df_DA_skills_tech_high_demand,
+    x='skill_percent',
+    y='median_salary',
+    hue='technology',  # Color by technology
+    palette='bright',  # Use a bright palette for distinct colors
+    legend='full'  # Ensure the legend is shown
+)
+plt.show()
+```
+### Results
+
+![Most Optimal techno for Data Analysts in the UK](3_Project/images/Optimal_techs.png)
+
+### Insights
+
+- Analyst tools (Excel, Tableau) look like strong pay–prevalence bets in this UK sample: Excel sits at the very top of median salary (~$88K) while remaining fairly common (~30%+), and Tableau is also moderately prevalent (~25%) with a solid median (~$82K). This suggests tooling tied to reporting, dashboards, and business-facing analytics is rewarded well when paired with impact.
+- Programming skills split into “baseline vs differentiator.” SQL is overwhelmingly common (~60%+), but its median (~$82K) is below the top-paying skills—typical for a must-have requirement. Python is less common (~25%) but near the top in pay (~$87K), implying it’s a clearer differentiator for higher-paid analyst roles.
+- SAS (programming) stands out negatively here: it’s relatively rare (~10–15%) and much lower-paid (~$51K). In this dataset it likely corresponds to niche/legacy roles rather than higher-compensation, modern analytics positions.
